@@ -1,103 +1,87 @@
-import Image from "next/image";
+// app/page.js
+export default async function HomePage() {
+  // 1. گرفتن لیست کلی کوکتل‌ها
+  const listRes = await fetch(
+    "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail"
+  )
+  const listData = await listRes.json()
+  const allCocktails = listData.drinks || []
 
-export default function Home() {
+  // 2. انتخاب 20 تا تصادفی بدون تکرار
+  function getRandomItems(arr, n) {
+    const result = []
+    const taken = new Set()
+
+    while (result.length < n && result.length < arr.length) {
+      const index = Math.floor(Math.random() * arr.length)
+      if (!taken.has(index)) {
+        taken.add(index)
+        result.push(arr[index])
+      }
+    }
+    return result
+  }
+
+  const selectedCocktails = getRandomItems(allCocktails, 20)
+
+  // 3. گرفتن جزئیات هر کوکتل به صورت همزمان
+  const detailsPromises = selectedCocktails.map(cocktail =>
+    fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${cocktail.idDrink}`
+    ).then(res => res.json())
+  )
+  const detailsResults = await Promise.all(detailsPromises)
+
+  // 4. استخراج داده‌های کامل هر نوشیدنی
+  const drinks = detailsResults
+    .map(result => (result.drinks && result.drinks[0] ? result.drinks[0] : null))
+    .filter(Boolean)
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div style={{ maxWidth: 900, margin: "0 auto", padding: "2rem" }}>
+      <h1>Random 20 Cocktails with Details</h1>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {drinks.map(drink => (
+          <li
+            key={drink.idDrink}
+            style={{
+              marginBottom: "2rem",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "1rem"
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            <h2>{drink.strDrink}</h2>
+            <img
+              src={drink.strDrinkThumb}
+              alt={drink.strDrink}
+              width={200}
+              style={{ borderRadius: 8 }}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <p><strong>Category:</strong> {drink.strCategory}</p>
+            <p><strong>Type:</strong> {drink.strAlcoholic}</p>
+            <p><strong>Glass:</strong> {drink.strGlass}</p>
+
+            <h3>Ingredients:</h3>
+            <ul>
+              {Array.from({ length: 15 }).map((_, i) => {
+                const ingredient = drink[`strIngredient${i + 1}`]
+                const measure = drink[`strMeasure${i + 1}`]
+                if (ingredient) {
+                  return (
+                    <li key={i}>
+                      {measure ? `${measure} ` : ""}{ingredient}
+                    </li>
+                  )
+                }
+                return null
+              })}
+            </ul>
+
+            <h3>Instructions:</h3>
+            <p>{drink.strInstructions}</p>
+          </li>
+        ))}
+      </ul>
     </div>
-  );
+  )
 }
