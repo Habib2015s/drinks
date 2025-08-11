@@ -15,16 +15,16 @@ character and filled it with new energy...`
   },
   option2: {
     backgroundImg: "/22.jpg",
-    overlayImg: "/some-default-overlay.jpg", // یا هر عکس دیگه‌ای
+    overlayImg: "https://robertassociety.com/wp-content/uploads/2025/04/Frame-27-1.png",
     title: "ABOUT US",
     text: `This is the about us section. Here you can put any content
 you want to show when option 2 is selected.`,
   },
   option3: {
-    backgroundImg: "/33.jpg", // یک عکس پس‌زمینه مثلا
-    overlayImg: null, // آیکون‌ها رو اینجا نمی‌ذاریم چون img src نیاز به رشته داره
+    backgroundImg: null,
+    overlayImg: null,
     title: "CONTACT",
-    text: `Contact us here. You can add phone numbers, email, or a form.`,
+    text: "",
   }
 }
 
@@ -61,62 +61,48 @@ export default function Main() {
       </div>
 
       {/* سمت راست - محتوا */}
-      <div className="w-1/2 bg-orange-300 flex items-center justify-center">
+      <div className="w-1/2 bg-orange-300 flex items-center justify-center relative">
         <AnimatePresence mode='wait' exitBeforeEnter>
           <motion.div
             key={selected}
-            style={{ transform: 'rotate(-8deg)' }}
             className="relative max-w-lg"
             variants={variants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            {/* عکس بزرگ (پشتی) */}
-            <img
-              className="w-96 rounded shadow-lg"
-              src={backgroundImg}
-              alt="Background"
-            />
-
-            {/* اگر گزینه ۳ انتخاب شد، آیکون‌ها رو اینجا نمایش بده */}
             {selected === 'option3' ? (
-              <div
-                style={{ transform: 'rotate(15deg)' }}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                  w-60 h-96 opacity-85 border-4 border-white rounded overflow-hidden shadow-2xl flex flex-col items-center justify-center gap-4 text-black"
-              >
-                <div className="flex gap-6 text-4xl">
-                  <FontAwesomeIcon icon={faInstagram} className="hover:scale-110 transition-transform cursor-pointer" />
-                  <FontAwesomeIcon icon={faYoutube} className="hover:scale-110 transition-transform cursor-pointer" />
-                  <FontAwesomeIcon icon={faFacebook} className="hover:scale-110 transition-transform cursor-pointer" />
-                  <FontAwesomeIcon icon={faLinkedin} className="hover:scale-110 transition-transform cursor-pointer" />
-                </div>
-                <div className="px-6 text-center">
-                  <h2 className="font-bold text-3xl mb-2">{title}</h2>
-                  <p className="text-xs leading-snug whitespace-pre-line">{text}</p>
-                </div>
+              <div className="flex gap-6 text-5xl text-black">
+                <p>Connect to Us</p>
+                <FontAwesomeIcon icon={faInstagram} className="hover:scale-110 transition-transform cursor-pointer" />
+                <FontAwesomeIcon icon={faYoutube} className="hover:scale-110 transition-transform cursor-pointer" />
+                <FontAwesomeIcon icon={faFacebook} className="hover:scale-110 transition-transform cursor-pointer" />
+                <FontAwesomeIcon icon={faLinkedin} className="hover:scale-110 transition-transform cursor-pointer" />
               </div>
             ) : (
-              /* عکس دوم با متن روی آن - وسط عکس اول */
-              <div
-                style={{ transform: 'rotate(15deg)' }}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                  w-60 h-96 opacity-85 border-4 border-white rounded overflow-hidden shadow-2xl"
-              >
-                {/* عکس رویی */}
+              <>
                 <img
-                  className="w-full h-full object-cover"
-                  src={overlayImg}
-                  alt="Overlay"
+                  className="w-96 rounded shadow-lg"
+                  src={backgroundImg}
+                  alt="Background"
+                  style={{ transform: 'rotate(-8deg)' }}
                 />
-
-                {/* متن روی عکس بدون بک‌گراند */}
-                <div className="absolute inset-0 flex flex-col justify-center text-black px-6 text-center drop-shadow-lg">
-                  <h2 className="font-bold text-3xl mb-2">{title}</h2>
-                  <p className="text-xs leading-snug whitespace-pre-line">{text}</p>
+                <div
+                  style={{ transform: 'rotate(15deg)' }}
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                    w-60 h-96 opacity-85 border-4 border-white rounded overflow-hidden shadow-2xl"
+                >
+                  <img
+                    className="w-full h-full object-cover"
+                    src={overlayImg}
+                    alt="Overlay"
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-center text-black px-6 text-center drop-shadow-lg">
+                    <h2 className="font-bold text-3xl mb-2">{title}</h2>
+                    <p className="text-xs leading-snug whitespace-pre-line">{text}</p>
+                  </div>
                 </div>
-              </div>
+              </>
             )}
           </motion.div>
         </AnimatePresence>
