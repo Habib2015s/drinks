@@ -21,8 +21,16 @@ export default function Fproduct() {
   };
 
   return (
-    <div className="w-full mx-auto p-10 bg-orange-200 rounded-lg shadow-lg">
-        <p className="text-center text-black font-bold text-3xl m-10">Popular Drinks</p>
+    <div
+      className="w-full mx-auto p-10 rounded-lg shadow-lg"
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(255,165,0,0.9) 60%, transparent 50%), url('/dd.jpg')`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
+      <p className="text-center text-white font-bold text-3xl m-10">Popular Drinks</p>
       <div className="flex justify-center gap-16">
         {videos.map((video, idx) => (
           <div
@@ -30,8 +38,7 @@ export default function Fproduct() {
             className="flex flex-col h-[500px] items-center cursor-pointer group 
                        bg-orange-200 rounded-lg shadow-lg p-6
                        transition-colors duration-500 ease-in-out
-                       hover:bg-black
-                       w-[280px] "
+                       hover:bg-black w-[280px]"
           >
             <video
               ref={(el) => (videoRefs.current[idx] = el)}
@@ -51,14 +58,13 @@ export default function Fproduct() {
           </div>
         ))}
         <div className="flex flex-col items-center justify-center cursor-pointer">
-            <p className="text-black font-bold">Shop ALL</p>
-        
-        <lord-icon
-    src="https://cdn.lordicon.com/ircnfpus.json"
-    trigger="hover"
-    colors="primary:#000000"
-    style={{width:'150px',height:'150px'}}>
-</lord-icon>
+          <p className="text-white font-bold">Shop ALL</p>
+          <lord-icon
+            src="https://cdn.lordicon.com/ircnfpus.json"
+            trigger="hover"
+            colors="primary:#ffffff"
+            style={{ width: "150px", height: "150px" }}
+          ></lord-icon>
         </div>
       </div>
     </div>
