@@ -50,6 +50,16 @@ export default function Fproduct() {
             <p className="text-center m-3 text-gray-400">{video.sub}</p>
           </div>
         ))}
+        <div className="flex flex-col items-center justify-center cursor-pointer">
+            <p className="text-black font-bold">Shop ALL</p>
+        
+        <lord-icon
+    src="https://cdn.lordicon.com/ircnfpus.json"
+    trigger="hover"
+    colors="primary:#000000"
+    style={{width:'150px',height:'150px'}}>
+</lord-icon>
+        </div>
       </div>
     </div>
   );
