@@ -43,8 +43,8 @@ export default function Header() {
 
         <div>
           <img
-            className="h-10"
-            src="https://files.peachworlds.com/website/71b7ed6e-3ecf-4491-9a55-1cb3889a157d/logo-long.svg"
+            className="h-25"
+            src="https://d10j3mvrs1suex.cloudfront.net/s:bzglfiles/u/623852/5a306c1a3a97ec60574529e55ae12e655bc872e0/original/bs-logo-2022-flat-72.png/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png"
             alt="Logo"
           />
         </div>
@@ -79,7 +79,7 @@ export default function Header() {
             </button>
             <a href="#" className="hover:text-amber-400 transition">Home</a>
             <a href="#" className="hover:text-amber-400 transition">About Us</a>
-            <a href="#" className="hover:text-amber-400 transition">Services</a>
+            <a href="#" className="hover:text-amber-400 transition">Products</a>
             <a href="#" className="hover:text-amber-400 transition">Contact</a>
           </motion.div>
         )}
@@ -89,7 +89,7 @@ export default function Header() {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 1, delay: 1 }}
         className="absolute top-2/3 left-[20%] transform -translate-y-1/2 z-10 max-w-md text-center"
       >
         <h1 className="text-4xl font-bold mb-4 drop-shadow-lg">Refresher Exotic</h1>

@@ -1,4 +1,5 @@
 import Header from "./Header";
+import Main from "./Main";
 
 // app/page.js
 export default async function HomePage() {
@@ -41,6 +42,7 @@ export default async function HomePage() {
 
   return (<div>
     <Header/>
+    <Main/>
   </div>
     // <div style={{ maxWidth: 900, margin: "0 auto", padding: "2rem" }}>
     //   <h1>Random 20 Cocktails with Details</h1>
