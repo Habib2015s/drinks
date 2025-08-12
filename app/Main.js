@@ -40,19 +40,20 @@ export default function Main() {
   const { backgroundImg, overlayImg, title, text } = content[selected]
 
   return (
-    <div className="w-full min-h-screen flex">
+    <div className="w-full min-h-screen flex flex-col md:flex-row bg-gradient-to-tr from-[#bb7873] to-[#d9a690]">
       {/* سمت چپ - منو */}
-      <div className="w-1/2 bg-[#bb7873] flex flex-col justify-center gap-6 p-10 text-white">
+      <div className="w-full md:w-1/2 flex flex-col justify-center gap-4 md:gap-6 p-6 md:p-10 text-white">
         {Object.keys(content).map(key => (
           <button
             key={key}
             onClick={() => setSelected(key)}
             className={`
-              text-2xl font-semibold p-4 rounded-lg cursor-pointer transition
+              text-lg md:text-2xl font-semibold p-3 md:p-4 rounded-lg cursor-pointer transition
               shadow-md
               ${selected === key
                 ? 'bg-amber-500 text-black shadow-lg scale-105'
                 : 'hover:bg-orange-300 hover:scale-105'}
+              focus:outline-none focus:ring-4 focus:ring-amber-300
             `}
           >
             {content[key].title}
@@ -61,19 +62,19 @@ export default function Main() {
       </div>
 
       {/* سمت راست - محتوا */}
-      <div className="w-1/2 bg-orange-300 flex items-center justify-center relative">
-        <AnimatePresence mode='wait' exitBeforeEnter>
+      <div className="w-full md:w-1/2 flex items-center justify-center relative p-4 md:p-0">
+        <AnimatePresence mode="wait" exitBeforeEnter>
           <motion.div
             key={selected}
-            className="relative max-w-lg"
+            className="relative max-w-full md:max-w-lg"
             variants={variants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
             {selected === 'option3' ? (
-              <div className="flex gap-6 text-5xl text-black">
-                <p>Connect to Us</p>
+              <div className="flex flex-wrap gap-6 justify-center text-4xl md:text-5xl text-black select-none">
+                <p className="w-full text-center mb-4 md:mb-0 font-semibold">Connect to Us</p>
                 <FontAwesomeIcon icon={faInstagram} className="hover:scale-110 transition-transform cursor-pointer" />
                 <FontAwesomeIcon icon={faYoutube} className="hover:scale-110 transition-transform cursor-pointer" />
                 <FontAwesomeIcon icon={faFacebook} className="hover:scale-110 transition-transform cursor-pointer" />
@@ -82,7 +83,7 @@ export default function Main() {
             ) : (
               <>
                 <img
-                  className="w-96 rounded shadow-lg"
+                  className="w-48 md:w-96 rounded shadow-lg mx-auto md:mx-0"
                   src={backgroundImg}
                   alt="Background"
                   style={{ transform: 'rotate(-8deg)' }}
@@ -90,16 +91,16 @@ export default function Main() {
                 <div
                   style={{ transform: 'rotate(15deg)' }}
                   className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                    w-60 h-96 opacity-85 border-4 border-white rounded overflow-hidden shadow-2xl"
+                    w-44 md:w-60 h-72 md:h-96 opacity-90 border-4 border-white rounded overflow-hidden shadow-2xl"
                 >
                   <img
                     className="w-full h-full object-cover"
                     src={overlayImg}
                     alt="Overlay"
                   />
-                  <div className="absolute inset-0 flex flex-col justify-center text-black px-6 text-center drop-shadow-lg">
-                    <h2 className="font-bold text-3xl mb-2">{title}</h2>
-                    <p className="text-xs leading-snug whitespace-pre-line">{text}</p>
+                  <div className="absolute inset-0 flex flex-col justify-center text-black px-4 md:px-6 text-center drop-shadow-lg">
+                    <h2 className="font-bold text-2xl md:text-3xl mb-2">{title}</h2>
+                    <p className="text-xs md:text-sm leading-relaxed whitespace-pre-line">{text}</p>
                   </div>
                 </div>
               </>
