@@ -84,23 +84,24 @@ export default function Header() {
 <AnimatePresence>
   {modalOpen && selectedDrink && (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={() => setModalOpen(false)}
     >
       <motion.div
-        className="bg-white rounded-2xl shadow-2xl p-12 max-w-lg w-full relative flex flex-col md:flex-row gap-6"
+        className="bg-white rounded-2xl shadow-2xl p-6 max-w-lg w-full flex flex-col md:flex-row gap-6 relative"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
         onClick={(e) => e.stopPropagation()}
+        style={{ maxHeight: '90vh', overflowY: 'auto' }}
       >
         {/* دکمه ضربدر */}
         <button
           onClick={() => setModalOpen(false)}
-          className="absolute top-4 right-4 text-3xl font-bold text-gray-700 hover:text-red-600 cursor-pointer"
+          className="absolute top-4 right-4 text-3xl font-bold text-gray-700 hover:text-red-600 cursor-pointer z-50"
           aria-label="Close modal"
         >
           &times;
