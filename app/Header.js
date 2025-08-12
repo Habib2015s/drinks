@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const LordIcon = dynamic(() => import("./LordIconWrapper"), { ssr: false });
 
@@ -89,9 +90,11 @@ export default function Header() {
             <a href="#" className="hover:text-amber-400 transition">
               About Us
             </a>
-            <a href="#" className="hover:text-amber-400 transition">
+            <Link href="/product">
+            <p className="hover:text-amber-400 transition">
               Products
-            </a>
+            </p>
+            </Link>
             <a href="#" className="hover:text-amber-400 transition">
               Contact
             </a>

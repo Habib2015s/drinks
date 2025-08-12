@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useRef, useEffect, useState } from "react";
 
 export default function Fproduct() {
@@ -116,18 +117,20 @@ export default function Fproduct() {
         ))}
 
         {/* دکمه Shop ALL */}
+        <Link href="/product">
         <div
           className="flex flex-col items-center justify-center cursor-pointer
-            w-[280px] md:w-[320px] text-white select-none"
-        >
+          w-[280px] md:w-[320px] text-white select-none"
+          >
           <p className="font-bold text-xl mb-4">Shop ALL</p>
           <lord-icon
             src="https://cdn.lordicon.com/ircnfpus.json"
             trigger="hover"
             colors="primary:#ffffff"
             style={{ width: "150px", height: "150px" }}
-          ></lord-icon>
+            ></lord-icon>
         </div>
+            </Link>
       </div>
     </div>
   );
