@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import Fproduct from "./Fproduct";
 import Header from "./Header";
 import IntrProduct from "./IntrProduct";
@@ -47,6 +48,7 @@ export default async function HomePage() {
     <Main/>
     <Fproduct/>
     <IntrProduct/>
+    <Footer/>
   </div>
     // <div style={{ maxWidth: 900, margin: "0 auto", padding: "2rem" }}>
     //   <h1>Random 20 Cocktails with Details</h1>
