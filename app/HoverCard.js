@@ -32,7 +32,7 @@ export default function HoverCard({ drink, isActive, onHover, onLeave }) {
           style={{
             opacity: isActive ? 1 : 0,
             transform: isActive ? "translateY(0)" : "translateY(20px)",
-            pointerEvents: isActive ? "auto" : "none", // جلوگیری از کلیک زمانی که مخفی است
+            pointerEvents: isActive ? "auto" : "none",
           }}
         >
           <h2 className="text-xl text-amber-950 font-bold mb-2">{drink.strDrink}</h2>
