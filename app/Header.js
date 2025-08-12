@@ -50,19 +50,66 @@ export default function Header() {
       </video>
 
       {/* منو */}
-      <div className="flex flex-col sm:flex-row justify-evenly items-center m-6 sm:m-10 relative z-20 gap-6 sm:gap-0">
-        <div onClick={() => setMenuOpen(prev => !prev)} className="flex items-center gap-2 cursor-pointer">
-          <p className="text-lg">Menu</p>
-          <LordIcon src="https://cdn.lordicon.com/izqdfqdl.json" trigger="hover" colors="primary:#ffffff" style={{ width: "30px", height: "30px" }} />
-        </div>
-        <div>
-          <img className="h-16 sm:h-25" src="https://d10j3mvrs1suex.cloudfront.net/s:bzglfiles/u/623852/5a306c1a3a97ec60574529e55ae12e655bc872e0/original/bs-logo-2022-flat-72.png" alt="Logo" />
-        </div>
-        <div className="flex justify-center items-center gap-2 hover:text-amber-400 transition">
-          <p>account</p>
-          <LordIcon src="https://cdn.lordicon.com/cniwvohj.json" trigger="hover" colors="primary:#ffffff" style={{ width: "30px", height: "30px" }} />
-        </div>
-      </div>
+  <div className="relative z-20 flex flex-col sm:flex-row items-center justify-between px-6 py-4 bg-black bg-opacity-60 text-white font-sans">
+  {/* لوگو وسط */}
+  <div className="order-2 sm:order-2">
+    <img
+      className="h-12 sm:h-16"
+      src="https://d10j3mvrs1suex.cloudfront.net/s:bzglfiles/u/623852/5a306c1a3a97ec60574529e55ae12e655bc872e0/original/bs-logo-2022-flat-72.png"
+      alt="Logo"
+    />
+  </div>
+
+  {/* دکمه منو موبایل */}
+  <button
+    className="order-1 sm:hidden flex items-center gap-2 focus:outline-none"
+    onClick={() => setMenuOpen(prev => !prev)}
+    aria-label="Toggle menu"
+  >
+    <p className="text-lg font-semibold">Menu</p>
+    <LordIcon
+      src="https://cdn.lordicon.com/izqdfqdl.json"
+      trigger="hover"
+      colors="primary:#ffffff"
+      style={{ width: 30, height: 30 }}
+    />
+  </button>
+
+  {/* منوی موبایل بازشونده */}
+  <AnimatePresence>
+    {menuOpen && (
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="absolute top-full left-0 right-0 bg-black bg-opacity-90 shadow-lg rounded-b-lg p-4 flex flex-col gap-4 sm:hidden z-30"
+      >
+        <a href="#" className="text-white hover:text-amber-400 transition font-medium" onClick={() => setMenuOpen(false)}>Home</a>
+        <a href="#" className="text-white hover:text-amber-400 transition font-medium" onClick={() => setMenuOpen(false)}>About</a>
+        <a href="#" className="text-white hover:text-amber-400 transition font-medium" onClick={() => setMenuOpen(false)}>Contact</a>
+      </motion.nav>
+    )}
+  </AnimatePresence>
+
+  {/* منوی دسکتاپ */}
+  <nav className="hidden sm:flex order-3 gap-10 font-semibold">
+    <a href="#" className="hover:text-amber-400 transition">Home</a>
+    <a href="#" className="hover:text-amber-400 transition">About</a>
+    <a href="#" className="hover:text-amber-400 transition">Contact</a>
+  </nav>
+
+  {/* حساب کاربری */}
+  <div className="order-4 flex items-center gap-2 hover:text-amber-400 transition cursor-pointer">
+    <p className="hidden sm:block font-medium">Account</p>
+    <LordIcon
+      src="https://cdn.lordicon.com/cniwvohj.json"
+      trigger="hover"
+      colors="primary:#ffffff"
+      style={{ width: 30, height: 30 }}
+    />
+  </div>
+</div>
+
 
       {/* متن وسط صفحه */}
       <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1 }}
