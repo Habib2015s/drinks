@@ -1,5 +1,6 @@
 import Fproduct from "./Fproduct";
 import Header from "./Header";
+import IntrProduct from "./IntrProduct";
 import Main from "./Main";
 
 // app/page.js
@@ -45,6 +46,7 @@ export default async function HomePage() {
     <Header/>
     <Main/>
     <Fproduct/>
+    <IntrProduct/>
   </div>
     // <div style={{ maxWidth: 900, margin: "0 auto", padding: "2rem" }}>
     //   <h1>Random 20 Cocktails with Details</h1>
