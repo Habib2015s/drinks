@@ -15,16 +15,23 @@ export default function Footer() {
             Subscribe to our newsletter and stay updated on new products,
             special offers, and healthy lifestyle tips.
           </p>
-          <div className="flex items-center bg-white rounded-full overflow-hidden shadow-md">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="flex items-center bg-white rounded-full overflow-hidden shadow-md max-w-md"
+          >
             <input
               type="email"
               placeholder="Enter your email"
+              required
               className="flex-1 px-4 py-2 outline-none text-sm"
             />
-            <button className="bg-black text-white px-4 py-2 hover:bg-gray-900 transition">
+            <button
+              type="submit"
+              className="bg-black text-white px-4 py-2 hover:bg-gray-900 transition"
+            >
               Subscribe
             </button>
-          </div>
+          </form>
         </div>
 
         {/* بخش توضیحات برند */}
@@ -44,30 +51,16 @@ export default function Footer() {
             Join our community and share your moments with us.
           </p>
           <div className="flex space-x-4 text-lg">
-            <a
-              href="#"
-              className="p-3 bg-black text-white rounded-full hover:bg-gray-700 transition"
-            >
-              <FaInstagram />
-            </a>
-            <a
-              href="#"
-              className="p-3 bg-black text-white rounded-full hover:bg-gray-700 transition"
-            >
-              <FaTwitter />
-            </a>
-            <a
-              href="#"
-              className="p-3 bg-black text-white rounded-full hover:bg-gray-700 transition"
-            >
-              <FaFacebookF />
-            </a>
-            <a
-              href="#"
-              className="p-3 bg-black text-white rounded-full hover:bg-gray-700 transition"
-            >
-              <FaYoutube />
-            </a>
+            {[FaInstagram, FaTwitter, FaFacebookF, FaYoutube].map((Icon, i) => (
+              <a
+                key={i}
+                href="#"
+                aria-label="social media link"
+                className="p-3 bg-black text-white rounded-full hover:bg-gray-700 transition flex items-center justify-center"
+              >
+                <Icon />
+              </a>
+            ))}
           </div>
         </div>
       </div>
