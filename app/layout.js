@@ -17,13 +17,38 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const bgColor = "#0a0a0a"; // رنگ پس‌زمینه ثابت
+  const textColor = "#ededed"; // رنگ متن ثابت
+
   return (
-    <html lang="en">
+    <html
+      lang="fa"
+      style={{
+        backgroundColor: bgColor,
+        color: textColor,
+      }}
+      suppressHydrationWarning
+    >
       <head>
-        {/* اضافه کردن favicon با مشخص کردن نوع فایل */}
-        <link rel="icon" href="/drink.png" type="image/png" />
+        {/* جلوگیری از چشمک سفید در موبایل */}
+        <meta name="theme-color" content={bgColor} />
+        <style>{`
+          html, body {
+            background-color: ${bgColor} !important;
+            color: ${textColor} !important;
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+          }
+        `}</style>
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          backgroundColor: bgColor,
+          color: textColor,
+        }}
+      >
         {children}
       </body>
     </html>
